@@ -11,6 +11,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,6 +25,7 @@ public class Base {
     Properties prop;
     FileInputStream fileInput;
     String workingDirectory = "/src/main/java/org/example/configuration/configuration.properties";
+
 
     public WebDriver initializeDriver() throws IOException {
 
@@ -73,6 +76,13 @@ public class Base {
         return  driver;
 
     }
+
+
+    public void tearDown(){
+        driver.close();
+        driver.quit();
+    }
+
 
 
 

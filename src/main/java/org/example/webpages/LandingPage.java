@@ -26,6 +26,9 @@ public class LandingPage extends Utility {
     @FindBy(id="login")
     WebElement loginButton;
 
+    @FindBy(css="[class*='flyInOut']")
+    WebElement errorMessage;
+
     // actions
 
     public void enterEmailId(String email){
@@ -40,6 +43,11 @@ public class LandingPage extends Utility {
 
         loginButton.click();
         return new ProductCatalogPage(driver);
+    }
+
+    public String getErrorMessage(){
+        waitForWebElementToAppear(errorMessage);
+        return errorMessage.getText();
     }
 
 
