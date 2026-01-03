@@ -1,7 +1,11 @@
 package org.example.testutility;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.example.webpages.LandingPage;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,19 +16,23 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 public class Base {
 
-    WebDriver driver;
+    public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
     Properties prop;
     FileInputStream fileInput;
     String workingDirectory = "/src/main/java/org/example/configuration/configuration.properties";
+
 
 
     public WebDriver initializeDriver() throws IOException {
@@ -34,6 +42,7 @@ public class Base {
         prop.load(fileInput);
         String browserName = prop.getProperty("browser");
         String url = prop.getProperty("url");
+        WebDriver driver = null;
 
         if (browserName.equalsIgnoreCase("chrome"))
         {
@@ -68,20 +77,59 @@ public class Base {
             driver = new SafariDriver(options);
 
         }
+
+        tlDriver.set(driver);   // store driver in ThreadLocal
+
         driver.manage().deleteAllCookies();
         driver.get(url);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        return  driver;
+        return getDriver();
 
+
+
+}
+
+
+    public WebDriver getDriver() {
+        return tlDriver.get();
     }
 
 
+
+
+    @AfterMethod
     public void tearDown(){
-        driver.close();
-        driver.quit();
+        getDriver().quit();
+        tlDriver.remove();
+
     }
+
+
+    public List<HashMap<String, String>> readDataFromJsonFileToMap(String jsonFilePath) throws IOException {
+
+        //reading json to string
+        String jsonContent = FileUtils.readFileToString(new File(jsonFilePath), StandardCharsets.UTF_8);
+        //convert string to hashmap
+        ObjectMapper objMapper = new ObjectMapper();
+        List<HashMap<String, String>> data = objMapper.readValue(jsonContent, new TypeReference<List<HashMap<String, String>>>() {
+        });
+        return data;
+    }
+
+
+   public String getScreenShot(String testCaseName , WebDriver driver) throws IOException {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        File file = new File(System.getProperty("user.dir")+"//reports//"+ testCaseName + ".png");
+        FileUtils.copyFile(source,file);
+        return System.getProperty("user.dir")+"//reports//"+ testCaseName + ".png";
+
+
+   }
+
+
 
 
 
