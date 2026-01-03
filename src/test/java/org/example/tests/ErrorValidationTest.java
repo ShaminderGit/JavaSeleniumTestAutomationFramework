@@ -2,6 +2,7 @@ package org.example.tests;
 
 import org.example.commonpages.Header;
 import org.example.testutility.Base;
+import org.example.testutility.Retry;
 import org.example.webpages.CartPage;
 import org.example.webpages.LandingPage;
 import org.example.webpages.ProductCatalogPage;
@@ -80,8 +81,8 @@ public class ErrorValidationTest extends Base {
 
     }
 
-
-     @Test(priority = 2 ,dataProvider = "getData")
+    // This test will run twice
+     @Test(priority = 2 ,dataProvider = "getData" , retryAnalyzer = Retry.class)
     public void loginErrorFailedForScreenshotTest(HashMap<String ,String> input) throws IOException {
 
         WebDriver driver = initializeDriver();
