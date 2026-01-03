@@ -1,0 +1,13 @@
+[
+  {
+    "email" : "thisis@gmail.com",
+    "wrongPassword" : "Qwerty@1234",
+    "correctPassword" : "Qwerty@123",
+    "product":"ADIDAS ORIGINAL",
+    "country": "India",
+    "thankYouMessage": "THANKYOU FOR THE ORDER."
+
+  }
+
+]
+

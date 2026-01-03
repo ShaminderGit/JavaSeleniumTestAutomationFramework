@@ -1,0 +1,31 @@
+[
+  {
+    "email" : "thisis@gmail.com",
+    "wrongPassword" : "Qwerty@1234",
+    "correctPassword" : "Qwerty@123",
+    "product":"ADIDAS ORIGINAL",
+    "country": "India",
+    "thankYouMessage": "THANKYOU FOR THE ORDER."
+
+  },
+
+  {
+    "email" : "thatisanemail@gmail.com",
+    "wrongPassword" : "Qwerty@123",
+    "correctPassword" : "Asdfg@123",
+    "product":"ZARA COAT 3",
+    "country": "India",
+    "thankYouMessage": "THANKYOU FOR THE ORDER."
+
+  }
+
+
+
+
+
+
+
+
+
+
+]
