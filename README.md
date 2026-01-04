@@ -2,6 +2,7 @@
 
 
 **A Production‑Ready Hybrid Framework | Java • Selenium • TestNG • Maven • Jenkins**
+
 This repository contains a complete, scalable, industry‑standard automation framework built using Java, Selenium WebDriver, TestNG, Maven, Page Object Model (POM), Data‑Driven Testing, Extent Reports, and Jenkins CI/CD.
 Designed with clean architecture and reusability in mind, this framework automates an E‑commerce application end‑to‑end and demonstrates real‑world automation engineering skills.
 
@@ -38,58 +39,39 @@ Designed with clean architecture and reusability in mind, this framework automat
   
  **FRAMEWORK ARCHITECTURE**
 
-Test Execution Layer
---------------------
+**Test Execution Layer**
 • TestNG Test Classes
 • Test Methods (E2E, Smoke, Regression)
 • testng.xml (suites, groups, parallel)
 
-          ↓
-
-Page Object Layer
------------------
+**Page Object Layer**
 • Page Classes (LoginPage, ProductPage, CartPage)
 • Page Factory Elements
 • Action Methods
 
-          ↓
-
-Abstract Components Layer
--------------------------
+**Abstract Components Layer**
 • Reusable Methods (waits, clicks, dropdowns)
 • Common WebDriver Utilities
 • Navigation Helpers
 
-          ↓
-
-Utilities Layer
----------------
+**Utilities Layer**
 • JSON Data Reader
 • DataProvider (HashMap)
 • Screenshot Utility
 • WebDriverManager Setup
 • ThreadLocal Driver Factory
 
-          ↓
-
-Core Engine Layer
------------------
+**Core Engine Layer**
 • Selenium WebDriver
 • Browser Initialization
 • Driver Lifecycle (BeforeMethod / AfterMethod)
 
-          ↓
-
-Reporting Layer
----------------
+**Reporting Layer**
 • Extent Reports
 • Screenshots on Failure
 • TestNG Listeners
 
-          ↓
-
-CI/CD Layer (Jenkins)
----------------------
+**CI/CD Layer (Jenkins)**
 • Headless Execution
 • Parameterized Builds
 • GitHub Webhook Triggers
