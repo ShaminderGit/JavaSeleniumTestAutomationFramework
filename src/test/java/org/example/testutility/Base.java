@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -43,8 +44,14 @@ public class Base {
         /*
          First try to read 'browser' from Maven
          If Maven does not provide it, fall back to the value in the properties file.
+         Extract browser + headless flag
+         Read runMode from Jenkins or fallback to properties
          */
-        String browserName = System.getProperty("browser", prop.getProperty("browser"));
+
+        String runMode = System.getProperty("runMode", prop.getProperty("browser"));
+        boolean isHeadless = runMode.contains("headless");
+        String browserName = runMode.replace("-headless", "");
+
         String url = prop.getProperty("url");
         WebDriver driver = null;
 
@@ -53,6 +60,10 @@ public class Base {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--proxy-server='direct://'");
             options.addArguments("--proxy-bypass-list=*");
+            if (isHeadless) {
+                options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
+            }
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(options);
 
@@ -61,6 +72,10 @@ public class Base {
             EdgeOptions options = new EdgeOptions();
             options.addArguments("--proxy-server='direct://'");
             options.addArguments("--proxy-bypass-list=*");
+            if (isHeadless) {
+                options.addArguments("--headless=new");
+                options.addArguments("--window-size=1920,1080");
+            }
             WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver(options);
 
@@ -70,6 +85,11 @@ public class Base {
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--proxy-server='direct://'");
             options.addArguments("--proxy-bypass-list=*");
+            if (isHeadless) {
+                options.addArguments("--headless");
+                options.addArguments("--width=1920");
+                options.addArguments("--height=1080");
+            }
             WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver(options);
 
@@ -86,7 +106,10 @@ public class Base {
 
         driver.manage().deleteAllCookies();
         driver.get(url);
-        driver.manage().window().maximize();
+        if (!isHeadless) {
+            driver.manage().window().maximize();
+            driver.manage().window().setSize(new Dimension(1400,900));
+        }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         return getDriver();
