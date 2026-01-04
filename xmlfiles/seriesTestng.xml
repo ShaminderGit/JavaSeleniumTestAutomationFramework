@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Series Automation Suite">
+
+    <listeners>
+        <listener class-name="org.example.testutility.Listeners"/>
+    </listeners>
+
+    <test name="Submit Order Tests">
+        <classes>
+            <class name="org.example.tests.SubmitOrderTest"/>
+        </classes>
+    </test>
+    <test name="Error Validation Tests">
+        <classes>
+            <class name="org.example.tests.ErrorValidationTest"/>
+        </classes>
+    </test>
+
+</suite>

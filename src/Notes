@@ -3,4 +3,6 @@ Framework Steps
 2. Select ArtifactId = maven-archetype-quickstart
 3. ArtifactId = Project Name
 4. GroupId = Think of it as Company and ArtifactId as Subsidiary.
+5. Project Directory for Maven = PS C:\Users\shami\IdeaProjects\JavaSeleniumTestAutomationFramework>
+6. b
 
