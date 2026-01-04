@@ -13,25 +13,30 @@ Designed with clean architecture and reusability in mind, this framework automat
 - Explicit waits
 - Streams‑based element filtering
 - End‑to‑end purchase flow automation
+  
 **TestNG Framework Implementation**
 - TestNG annotations
 - Groups, priorities, dependencies
 - Parallel execution
 - DataProvider (JSON + HashMap)
 - TestNG XML suite configuration
+  
 **Page Object Model (POM) Architecture**
 - Page Factory
 - Abstract Components for reusable logic
 - Clean separation of concerns
 - Easy scalability for new modules
+  
 **Robust Reporting & Debugging**
 - Extent Reports integration
 - Automatic screenshots on failure
 - TestNG Listeners for reporting hooks
+  
 **Thread‑Safe Parallel Execution**
 - ThreadLocal WebDriver
 - Eliminates concurrency issues
 - Supports multi‑browser scaling
+  
 **CI/CD Ready**
 - Jenkins job integration
 - Headless execution
@@ -40,21 +45,25 @@ Designed with clean architecture and reusability in mind, this framework automat
  **FRAMEWORK ARCHITECTURE**
 
 **Test Execution Layer**
+
 • TestNG Test Classes
 • Test Methods (E2E, Smoke, Regression)
 • testng.xml (suites, groups, parallel)
 
 **Page Object Layer**
+
 • Page Classes (LoginPage, ProductPage, CartPage)
 • Page Factory Elements
 • Action Methods
 
 **Abstract Components Layer**
+
 • Reusable Methods (waits, clicks, dropdowns)
 • Common WebDriver Utilities
 • Navigation Helpers
 
 **Utilities Layer**
+
 • JSON Data Reader
 • DataProvider (HashMap)
 • Screenshot Utility
@@ -62,22 +71,26 @@ Designed with clean architecture and reusability in mind, this framework automat
 • ThreadLocal Driver Factory
 
 **Core Engine Layer**
+
 • Selenium WebDriver
 • Browser Initialization
 • Driver Lifecycle (BeforeMethod / AfterMethod)
 
 **Reporting Layer**
+
 • Extent Reports
 • Screenshots on Failure
 • TestNG Listeners
 
 **CI/CD Layer (Jenkins)**
+
 • Headless Execution
 • Parameterized Builds
 • GitHub Webhook Triggers
 • Scheduled Nightly Jobs
 
 **How to Run the Tests**
+
 1. Run via Maven
 mvn clean test
 2. Run a specific TestNG suite
@@ -86,6 +99,7 @@ mvn clean test -DsuiteXmlFile=testng.xml
 mvn clean test -Dheadless=true
 
 **Reports**
+
 After execution, Extent Reports are generated at:
 /reports/index.html
 Includes:
