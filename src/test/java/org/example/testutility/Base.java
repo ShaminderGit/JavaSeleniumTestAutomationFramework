@@ -40,7 +40,11 @@ public class Base {
         prop = new Properties();
         fileInput = new FileInputStream( System.getProperty("user.dir") + workingDirectory);
         prop.load(fileInput);
-        String browserName = prop.getProperty("browser");
+        /*
+         First try to read 'browser' from Maven
+         If Maven does not provide it, fall back to the value in the properties file.
+         */
+        String browserName = System.getProperty("browser", prop.getProperty("browser"));
         String url = prop.getProperty("url");
         WebDriver driver = null;
 
